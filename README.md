@@ -13,11 +13,6 @@ A Matlab library is provided by the authors but I felt more comfortable working 
 
 
 
-@InProceedings{Donoho.and.Stodden.2006,
-  Title                    = {Breakdown point of model selection when the number of variables exceeds the number of observations},
-  Author                   = {Donoho, David and Stodden, Victoria},
-  Booktitle                = {The 2006 IEEE International Joint Conference on Neural Network Proceedings},
-  Year                     = {2006},
-  Organization             = {IEEE},
-  Pages                    = {1916-1921}
-}
+Donoho, David and Stodden, Victoria. Breakdown point of model selection when the number of variables exceeds the number of observations,
+The 2006 IEEE International Joint Conference on Neural Network Proceedings, 2006, pp 1916-1921.
+
