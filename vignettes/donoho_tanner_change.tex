@@ -114,7 +114,7 @@
 
 \newsavebox\ltmcbox
 
-\title{The Donoho-Tanner phase transition}
+\title{The Donoho-Tanner Phase Transition}
 \author{}
 \date{}
 
@@ -134,7 +134,7 @@
 %% \end{lstlisting}
 
 
-\section{introduction}
+\section{Introduction}
 We consider the question of variable recovery in a sparse linear system $y=X \beta + \epsilon$ where only
 a small number $k$ of the $\beta$ variables are not equal to 0. We would like the solution,
 \[
@@ -150,13 +150,13 @@ My aims in this exercise have been threefold:
 \begin{itemize}
 \item to investigate these ideas  in R. To this end I have replicated some of the plots from
   \cite{Donoho.and.Stodden.2006};
-\item to see if ranking method like rank-biased-overlap (RBO) \cite{Webber2010} will allow us to extend some of these
+\item to see if a ranking method like rank-biased-overlap (RBO) \cite[]{Webber2010} will allow us to extend some of these
   ideas to methods that do not produce an estimate of the $\beta$ coefficients. See section \ref{section:the.Rank.biased.Overlap.measure} for a brief
   discussion of RBO;
 \item to see how a random forest behaves on the simulation used in \cite{Donoho.and.Stodden.2006}.
 \end{itemize}
 
-\section{The phase-transition}
+\section{The phase transition}
 \cite{Donoho.and.Tanner.2009} give a ``universal phase change'' result that has applications in a
 large number of areas, including variable selection in high dimensions. The theoretical phase change boundary is based on arguments
 from combinatorial geometry.
@@ -166,12 +166,12 @@ accuracy by procedures like stepwise variable selection, and the cases where the
 shown in Fig~\ref{figure:phase-diagram-equivalence.png} in the ``phase space'' parameterized by the level of underdetermination,
 $\delta = n/p$, and by the sparsity, $\rho =k/n$ (where $k$ is the number of informative variables).  Above the
 phase-transition line variable recovery is still possible by an exaustive search.
-variable selection.
 
 \begin{figure}[tbhp] 
     \centering
     \includegraphics[totalheight=6cm,width=12cm]{./figs/phase2.png} %-diagram-equivalence.png} 
-    \caption{The phase change diagram. reproduced from \protect{\cite{Donoho.and.Stodden.2006}} }
+    \caption{The phase change diagram. Below the line informative variables may be recovered with a high
+      accuracy. Above the line a combinatorial search is required. Reproduced from \protect{\cite{Donoho.and.Stodden.2006}} }
     \label{figure:phase-diagram-equivalence.png} 
     \vspace{4ex}
 \end{figure}
@@ -180,7 +180,7 @@ variable selection.
 \section{A simulation}
 \cite{Donoho.and.Stodden.2006} investigate the phase transition in a small simulation.  They consider a regression
 problem with $\underset{n\times p}{X}\sim N(0,1)$ with $p$ fixed at 200 and $n$ variable. Figures \ref{figure:k.png} and
-\ref{figure:n.png} show the phase space colored by $n$ and $k$,
+\ref{figure:n.png} show the phase space colored by $n$ and $k.$
 
 They set $\beta(1:k) \sim U(1,100)$ and $\beta((k+1):p) =0$, then $y= X\beta + \epsilon$ with
 $\epsilon \sim N(0,\sqrt{16})$. They evaluate variable selection by the normalized $l_2$ error measure
@@ -224,12 +224,14 @@ is less clear.
     \caption{The RBO measure}
     \label{figure:rbo_Stodden_FDR.png}
   \end{subfigure} 
-  \caption{Forward stepwise variable selction with a false discovery rate stopping criteria.}
+  \caption{Forward stepwise variable selection with a false discovery
+    rate stopping criteria. Note that the plot colors have been chosen so that the lighter color indicates
+      the better result, that is, a lower error or a higher RBO.}
   \label{figure:error_and_rbo_Stodden_FDR.png}
 \end{figure}
 
 
-\section{Random Forests on the simulation}
+\section{Random Forests on the simulated data}
 % We have seen no work on the question of such a phase transition in the case of classification problems. Still it may be
 % instructive to consider the implications of the pahse transition for our work. As \cursedforest is designed for
 % extremely large numbers of variables it is likely to be operating in difficult regions of the figure where the ratio
@@ -278,6 +280,8 @@ shows no evidence of following the shape of the Donoho-Tanner phase transition.
 We have investigated the Donoho-Tanner phase transition in a small simulation, replicating some of the work of
 \cite{Donoho.and.Stodden.2006}. We have investigated the use of the RBO measure for comparing the variable importance
 ranking produce by a random forest and the $\beta$ parameters in a linear model used to define the data.
+
+
 
 \bibliography{./stepwise.bib}
 

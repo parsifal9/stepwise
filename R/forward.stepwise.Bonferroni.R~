@@ -12,11 +12,15 @@
 #' Consider this to be "beta" code (and feel free to improve it).  I've done very limited testing on it.
 #'
 #' Author: Paul A. Rubin (rubin@msu.edu)
-#' @param love Do you love cats? Defaults to TRUE.
-#' @keywords cats
+#' @param full.model A model formula
+#' @param initial.model A model formula
+#' @param XX  a data.frame
+#' @keywords  stepwise linear regression Bonferroni
 #' @export
 #' @examples
-#' forward.stepwise.Bonferroni()
+#' full.model <- mpg~ .
+#' initial.model <- mpg~ 1
+#' aa<-forward.stepwise.Bonferroni(full.model, initial.model,XX=mtcars)
 
 forward.stepwise.Bonferroni<-function(full.model, initial.model,XX) {
     ## full.model is the model containing all possible terms

@@ -14,19 +14,20 @@
 #' Author: Paul A. Rubin (rubin@msu.edu)
 #' @param full.model A model formula
 #' @param initial.model A model formula
-#' @param XX  a data.frame
+#' @param data  A data.frame
+#' @return a fitted model of class lm 
 #' @keywords  stepwise linear regression Bonferroni
 #' @export
 #' @examples
 #' full.model <- mpg~ .
 #' initial.model <- mpg~ 1
-#' aa<-forward.stepwise.FDR(full.model, initial.model,XX=mtcars)
+#' aa<-forward.stepwise.FDR(full.model, initial.model,data=mtcars)
 
 
 
 
 
-forward.stepwise.FDR <- function(full.model, initial.model, XX) {
+forward.stepwise.FDR <- function(full.model, initial.model, data) {
     ## full.model is the model containing all possible terms
     ## initial.model is the first model to consider
     ## (Useful things for someone to add: specification of a data frame; a list of variables that must be included)
@@ -36,13 +37,13 @@ forward.stepwise.FDR <- function(full.model, initial.model, XX) {
     environment(full.model) <- env
     environment(initial.model) <-env
 
-    all.variables<-dim(XX)[2]-1
+    all.variables<-dim(data)[2]-1
     
-    full <- lm(full.model,data=XX);  ## fit the full model
+    full <- lm(full.model,data=data);  ## fit the full model
     msef <- (summary(full)$sigma)^2;  ## MSE of full model
     n <- length(full$residuals);  ## sample size
     allvars <- attr(full$terms, "predvars");  ## this gets a list of all predictor variables
-    current <- lm(initial.model,data=XX);  ## this is the current model
+    current <- lm(initial.model,data=data);  ## this is the current model
     
     while (TRUE) {  ## process each model until we break out of the loop
         temp <- summary(current);  ## summary output for the current model
@@ -77,7 +78,7 @@ forward.stepwise.FDR <- function(full.model, initial.model, XX) {
             ##      write(paste("+++ Adding", var, "\n"), file="");  ## print the variable being added
             f <- formula(current);  ## current formula
             f <- as.formula(paste(f[2], "~", paste(f[3], var, sep=" + ")));  ## modify the formula to add the chosen variable
-            current <- lm(f,data=XX);  ## fit the modified model
+            current <- lm(f,data=data);  ## fit the modified model
             next;  ## return to the top of the loop
         }
         ## if we get here, we failed to make any changes to the model; time to punt

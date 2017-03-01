@@ -1,6 +1,7 @@
+#'  Fitting Linear Models Stepwise
+#'
 #' This is an R function to perform stepwise regression based on a "nested model" F test for inclusion/exclusion
 #' of a predictor.
-#'
 #' Originally by Paul A. Rubin (rubin@msu.edu). I have added provision for passing a data frame. The original notice reads:
 #' "To keep it simple, I made no provision for forcing certain variables to be included in
 #' all models, did not allow for specification of a data frame, and skipped some consistency checks (such as whether
@@ -16,10 +17,10 @@
 #' Author: Paul A. Rubin (rubin@msu.edu)
 #' @param full.model A model formula
 #' @param initial.model A model formula
-#' @param alpha.to.enter a p-value
-#' @param alpha.to.leave a p-value
-#' @param XX  a data.frame
-#' @return a fitted model
+#' @param alpha.to.enter A p-value
+#' @param alpha.to.leave A p-value
+#' @param data  A data.frame
+#' @return A fitted model of class lm 
 #' @keywords stepwise linear regression
 #' @export
 #' @examples

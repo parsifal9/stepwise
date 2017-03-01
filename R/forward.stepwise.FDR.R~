@@ -17,6 +17,7 @@
 #' @param XX  a data.frame
 #' @keywords  stepwise linear regression Bonferroni
 #' @export
+#' @examples
 #' full.model <- mpg~ .
 #' initial.model <- mpg~ 1
 #' aa<-forward.stepwise.FDR(full.model, initial.model,XX=mtcars)
