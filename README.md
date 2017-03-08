@@ -13,7 +13,7 @@ IEEE International Joint Conference on Neural Network Proceedings, 2006, pp 1916
 
 A Matlab library is provided by the authors but I felt more comfortable working in R.
 
-to install the package in R, first check it have the libraries
+To install the package in R, first check if you have the libraries
 ````
 library("R.rsp")
 library("devtools")
@@ -24,7 +24,6 @@ install.packages("R.rsp")
 install.packages("devtools")
 ````
 then
-
 ````
 library("devtools")
 install_github("parsifal9/stepwise")
