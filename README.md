@@ -15,9 +15,12 @@ A Matlab library is provided by the authors but I felt more comfortable working 
 
 to install the package in R use
 
+````
+install.packages("R.rsp")
 library("devtools")
-
 install_github("parsifal9/stepwise")
+library(stepwise)
+````
 
 To see the plots exploring the breakdown point type
 

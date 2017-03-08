@@ -17,7 +17,7 @@ to install the package in R use
 
 library("devtools")
 
-install_github("parsifal9/stepwise-")
+install_github("parsifal9/stepwise")
 
 To see the plots exploring the breakdown point type
 

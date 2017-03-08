@@ -135,12 +135,12 @@
 
 
 \section{Introduction}
-We consider the question of variable recovery in a sparse linear system $y=X \beta + \epsilon$ where only
-a small number $k$ of the $\beta$ variables are not equal to 0. We would like the solution,
+We consider the question of variable recovery in a sparse linear system, $y=X \beta + \epsilon,$ where only
+a small number, $k$, of the $\beta$ variables are not equal to 0. We would like the solution,
 \[
 \min_\beta \rVert \beta \rVert_0 \textrm{ s.t. } y = X\beta,
 \]
-however; this is computationally unfeasible for larger numbers of variables. We have to approximate the solution by
+however; this is computationally infeasible for larger numbers of variables. We have to approximate the solution by
 minimizing some $l_1$ or $l_2$ criteria, or by a more limited heuristic search of the solution space.
 \cite{Donoho.and.Tanner.2009} and \cite{Donoho.and.Stodden.2006}  have considered this problem and introduce a ``phase
 diagram'' to help explore the behaviour of various approaches.
@@ -148,7 +148,7 @@ This is implemented in the Matlab library \url{https://sparselab.stanford.edu}.
 
 My aims in this exercise have been threefold:
 \begin{itemize}
-\item to investigate these ideas  in R. To this end I have replicated some of the plots from
+\item to investigate these ideas  in R. To this end I have replicated the example and some of the plots from
   \cite{Donoho.and.Stodden.2006};
 \item to see if a ranking method like rank-biased-overlap (RBO) \cite[]{Webber2010} will allow us to extend some of these
   ideas to methods that do not produce an estimate of the $\beta$ coefficients. See section \ref{section:the.Rank.biased.Overlap.measure} for a brief
@@ -158,20 +158,22 @@ My aims in this exercise have been threefold:
 
 \section{The phase transition}
 \cite{Donoho.and.Tanner.2009} give a ``universal phase change'' result that has applications in a
-large number of areas, including variable selection in high dimensions. The theoretical phase change boundary is based on arguments
-from combinatorial geometry.
+large number of areas, including variable selection in high dimensions.
 
-They argue that there is a sharp disjunction between the cases where informative variables may be recovered with a high
-accuracy by procedures like stepwise variable selection, and the cases where they can not be recovered. The boundary is
+The phase change boundary is
 shown in Fig~\ref{figure:phase-diagram-equivalence.png} in the ``phase space'' parameterized by the level of underdetermination,
-$\delta = n/p$, and by the sparsity, $\rho =k/n$ (where $k$ is the number of informative variables).  Above the
+$\delta = n/p$, and by the sparsity, $\rho =k/n$ (where $k$ is the number of informative variables).  
+They argue that there is a sharp disjunction between the cases where informative variables may be recovered with a high
+accuracy by procedures like stepwise variable selection, and the cases where they can not be recovered. Above the
 phase-transition line variable recovery is still possible by an exaustive search.
+
+The theoretical phase change boundary is based on arguments from combinatorial geometry.
 
 \begin{figure}[tbhp] 
     \centering
     \includegraphics[totalheight=6cm,width=12cm]{./figs/phase2.png} %-diagram-equivalence.png} 
     \caption{The phase change diagram. Below the line informative variables may be recovered with a high
-      accuracy. Above the line a combinatorial search is required. Reproduced from \protect{\cite{Donoho.and.Stodden.2006}} }
+      accuracy. Above the line a combinatorial search is required. Reproduced from \protect{\cite{Donoho.and.Stodden.2006}}.}
     \label{figure:phase-diagram-equivalence.png} 
     \vspace{4ex}
 \end{figure}
@@ -181,18 +183,6 @@ phase-transition line variable recovery is still possible by an exaustive search
 \cite{Donoho.and.Stodden.2006} investigate the phase transition in a small simulation.  They consider a regression
 problem with $\underset{n\times p}{X}\sim N(0,1)$ with $p$ fixed at 200 and $n$ variable. Figures \ref{figure:k.png} and
 \ref{figure:n.png} show the phase space colored by $n$ and $k.$
-
-They set $\beta(1:k) \sim U(1,100)$ and $\beta((k+1):p) =0$, then $y= X\beta + \epsilon$ with
-$\epsilon \sim N(0,\sqrt{16})$. They evaluate variable selection by the normalized $l_2$ error measure
-$$\frac{\Vert\hat{\beta}-\beta\Vert_2}{\Vert\beta\Vert_2}.$$
-
-They consider a number of variable selection methods, including a false discovery rate criteria. This involves adding
-the variable with the maximum $t$-value to the linear model if the $p$-value is less than
-$0.25(\text{number of terms currently in the model})/(\text{total number of variables})$.  See
-Fig~\ref{figure:error_Stodden_FDR.png} for the error measure and figure \ref{figure:rbo_Stodden_FDR.png} for the RBO,
-comparing the ranking (i.e. values) of $\hat{\beta}$ and $\beta$. It apparent that the accuracy of the  error measure
-shows a marked drop in line with the prediction of the Donoho-Tanner phase transition. The behaviour of the RBO measure
-is less clear.
 
 \begin{figure}[tbhp] 
     \begin{subfigure} [b]{0.5\linewidth}
@@ -210,6 +200,22 @@ is less clear.
     \caption{The simulation in \protect{\cite{Donoho.and.Stodden.2006}} considers $\delta = n/p$ and $\rho =k/n$. Here we plot the
       space of $\{\delta, \rho$\}, colored  by the paramters $n$ and $k.$}
 \end{figure}
+
+They set $\beta(1:k) \sim U(1,100)$ and $\beta((k+1):p) =0$, then $y= X\beta + \epsilon$ with
+$\epsilon \sim N(0,\sqrt{16})$. They evaluate variable selection by the normalized $l_2$ error measure
+$$\frac{\Vert\hat{\beta}-\beta\Vert_2}{\Vert\beta\Vert_2}.$$
+
+They consider a number of variable selection methods, including a false discovery rate criteria. This involves adding
+the variable with the maximum $t$-value to the linear model if the $p$-value is less than
+$0.25(\text{number of terms currently in the model})/(\text{total number of variables})$.  See
+Fig~\ref{figure:error_Stodden_FDR.png} for the error measure and figure \ref{figure:rbo_Stodden_FDR.png} for the RBO,
+comparing the ranking (i.e. values) of $\hat{\beta}$ and $\beta$. It apparent that the accuracy of the  error measure
+shows a marked drop in line with the prediction of the Donoho-Tanner phase transition. The behaviour of the RBO measure
+is less clear.
+
+Figure \ref{figure:transect.png} shows the error values for $\delta=0.5$ in for the data from Figure
+\ref{figure:error_Stodden_FDR.png}. The sudden nature of the change can be seen.
+
 
 \begin{figure}[tbhp] 
   \begin{subfigure}[t]{0.5\linewidth}
@@ -270,10 +276,96 @@ shows no evidence of following the shape of the Donoho-Tanner phase transition.
   \label{figure:ranger_error_and_rbo_Stodden_simulation.png}
 \end{figure}
 
-\section{the Rank-biased Overlap measure
-\label{section:the.Rank.biased.Overlap.measure}}
-\cite{Webber2010}
-\cite{gespeR.2015} 
+\section{The rank-biased overlap measure
+  \label{section:the.Rank.biased.Overlap.measure}}
+
+The rank-biased-overlap measure (RBO) was introduced in \cite{Webber2010}.
+It provides a measure of the commonality of ranked lists with the following features:
+\begin{itemize}
+\item it can handle lists that are incomplete or have only some members in common;
+\item weights similarity in high ranks more heavily than low;
+\item it is monotonic with increasing depth of evaluation;
+\item it can handle  tied ranks and rankings of different lengths.
+\end{itemize}
+
+We have included the implementation of RBO form the R package \textsc{gespeR} \cite[]{gespeR.2015},
+a specialized bioinformatics package that not all users will want to install.
+For a simple illustration we compare two lists:
+\begin{lstlisting}
+  > list1
+  X1 X2 X3 X4 X5 
+  5  4  3  2  1 
+\end{lstlisting}
+and the longer list \texttt{list2} (length 1000).
+\begin{lstlisting}
+  > head(list2)
+  X1   X2   X3   X4   X5   X6 
+  1000  999  998  997  996  995
+  > rbo(list1, list2, p = 0.95)
+  1
+\end{lstlisting}
+We then move the matching segment along one place each time i.e.
+\begin{lstlisting}
+  > list2[1:10]
+  X6   X1   X2   X3   X4   X5  X12  X13  X14  X15 
+  1000  999  998  997  996  995  994  993  992  991
+  > rbo(list1, list2, p = 0.95)
+  0.8
+\end{lstlisting}
+The $p$-value determines the witghting given to the higher rankings.
+Figure \ref{figure:shift_variables.png} shows the RBO measure as the matching segement is moved along. 
+% \begin{figure}[tbhp]
+%  \includegraphics[totalheight=8cm]{./figs/shift_variables.png}
+%  \caption{The RBO measure as \texttt{list1} is shifted along \texttt{list2}.}
+%   \label{figure:shift_variables.png}
+% \end{figure}
+
+While the RBO measure is designed for integer ranks, it works and gives sensible answers for real values as well.
+
+
+% \begin{figure}[tbhp]
+%   \includegraphics[totalheight=8cm]{./figs/transect.png}
+%   \caption{The RBO measure as \texttt{list1} is shifted along \texttt{list2}.}
+%   \label{figure:transect.png}
+% \end{figure}
+
+
+
+
+\begin{figure}[ht]
+  \begin{minipage}[t]{0.5\linewidth}
+    \centering
+    \includegraphics[width=0.8\linewidth]{./figs/shift_variables.png}
+    \caption{The RBO measure as \texttt{list1} is shifted along \texttt{list2}.}
+    \label{figure:shift_variables.png}
+    \vspace{4ex}
+  \end{minipage}%%
+\hspace{4ex}
+  \begin{minipage}[t]{0.5\linewidth}
+    \centering
+    \includegraphics[width=0.8\linewidth]{./figs/transect.png}
+    \caption{For $\delta=0.5$ in figure \ref{figure:error_Stodden_FDR.png}, we plot the error for values of $\rho.$} 
+ \label{figure:transect.png}
+    \vspace{4ex}
+  \end{minipage}
+\end{figure}
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 \section{Conclusion}
