@@ -1,6 +1,6 @@
-stepwise
+#stepwise
 
-Several function for doing stepwise linear regression in R.
+##Several function for doing stepwise linear regression in R.
 
 Based on an original function by  Paul A. Rubin which was written for teaching purposes 
 (see his comments at http://orinanobworld.blogspot.com.au/2011/02/stepwise-regression-in-r.html).
