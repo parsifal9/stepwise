@@ -9,21 +9,30 @@ I have added two other functions, forward.stepwise.Bonferroni() and forward.step
 which do forward stepwise model selection with respectively a Bonferroni and False Discovery rate stopping rule.
 My interest in doing this was to replicate some of the work in 
 David Donoho and Victoria Stodden *Breakdown point of model selection when the number of variables exceeds the number of observations,*
-The 2006 IEEE International Joint Conference on Neural Network Proceedings, 2006, pp 1916-1921.
+IEEE International Joint Conference on Neural Network Proceedings, 2006, pp 1916-1921.
 
 A Matlab library is provided by the authors but I felt more comfortable working in R.
 
-to install the package in R use
-
+to install the package in R, first check it have the libraries
+````
+library("R.rsp")
+library("devtools")
+````
+if not
 ````
 install.packages("R.rsp")
+install.packages("devtools")
+````
+then
+
+````
 library("devtools")
 install_github("parsifal9/stepwise")
 library(stepwise)
 ````
 
 To see the plots exploring the breakdown point type
-
+````
 vignette("donoho_tanner_change")
-
+````
 
