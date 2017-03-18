@@ -1,33 +1,29 @@
-
-## Evaluates the rank biased overlap (rbo) of two ranked lists based
-## on formula based on (32) from "A Similarity Measure for Indefinite
-## Rankings" (Webber et al.). Two ranked lists with high rbo are very
-## similar, wheras low rbo indicates dissimilar lists. rbo ranges
-## between 0 and 1. 
-
-## Usage:
-
-##      rbo(s, t, p, k = floor(max(length(s), length(t))/2), side = c("top",
-##        "bottom"), mid = NULL, uneven.lengths = TRUE)
-     
-## Arguments:
-
-##        s: List 1
-
-##        t: List 2
-
-##        p: Weighting parameter in [0, 1]. High p implies strong emphasis
-##           on top ranked elements
-
-##        k: Evaluation depth for extrapolation
-
-##     side: Evaluate similarity between the top or the bottom of the
-##           ranked lists
-
-##      mid: Set the mid point to for example only consider positive or
-##           negative scores
-
-## uneven.lengths: Indicator if lists have uneven lengths
+#' Rank biased overlap (Webber et al., 2010)
+#' 
+#' Evaluates the rank biased overlap (rbo) of two ranked lists based on formula based on (32) from 
+#' "A Similarity Measure for Indefinite Rankings" (Webber et al.). Two ranked lists with high rbo are
+#' very similar, wheras low rbo indicates dissimilar lists. rbo ranges between 0 and 1. In this method
+#' the extrapolated version of rbo is implemented. This implementation was taken from the pacakge  gespeR (version 1.1.2)
+#' by Fabian Schmich. I included it here as gespeR is a specialized bioinformatics pacakage that,
+#' from which we are only interested in one function.
+#' 
+#' @author Fabian Schmich
+#' @export
+#' 
+#' @param s List 1
+#' @param t List 2
+#' @param p Weighting parameter in [0, 1]. High p implies strong emphasis on top ranked elements
+#' @param k Evaluation depth for extrapolation
+#' @param side Evaluate similarity between the top or the bottom of the ranked lists
+#' @param mid Set the mid point to for example only consider positive or negative scores
+#' @param uneven.lengths Indicator if lists have uneven lengths
+#' @return rank biased overlap (rbo)
+#' 
+#' @examples
+#' a <- rnorm(26)
+#' b <- rnorm(26)
+#' names(a) <- names(b) <- LETTERS
+#' rbo(a, b, p = 0.95)
 
 rbo <- function(s, t, p, k=floor(max(length(s), length(t))/2), side=c("top", "bottom"), mid=NULL, uneven.lengths = TRUE) {
   side <- match.arg(side)
