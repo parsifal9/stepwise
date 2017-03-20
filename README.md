@@ -26,6 +26,7 @@ install.packages("devtools")
 then
 ````
 library("devtools")
+options(unzip = 'internal') #needed on some machines to get install_github working
 install_github("parsifal9/stepwise")
 library(stepwise)
 ````
