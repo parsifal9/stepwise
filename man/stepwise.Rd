@@ -2,8 +2,7 @@
 % Please edit documentation in R/stepwise.R
 \name{stepwise}
 \alias{stepwise}
-\title{This is an R function to perform stepwise regression based on a "nested model" F test for inclusion/exclusion
-of a predictor.}
+\title{Fitting Linear Models Stepwise}
 \usage{
 stepwise(full.model, initial.model, alpha.to.enter, alpha.to.leave, data)
 }
@@ -12,16 +11,18 @@ stepwise(full.model, initial.model, alpha.to.enter, alpha.to.leave, data)
 
 \item{initial.model}{A model formula}
 
-\item{alpha.to.enter}{a p-value}
+\item{alpha.to.enter}{A p-value}
 
-\item{alpha.to.leave}{a p-value}
+\item{alpha.to.leave}{A p-value}
 
-\item{XX}{a data.frame}
+\item{data}{A data.frame}
 }
 \value{
-a fitted model
+A fitted model of class lm
 }
 \description{
+This is an R function to perform stepwise regression based on a "nested model" F test for inclusion/exclusion
+of a predictor.
 Originally by Paul A. Rubin (rubin@msu.edu). I have added provision for passing a data frame. The original notice reads:
 "To keep it simple, I made no provision for forcing certain variables to be included in
 all models, did not allow for specification of a data frame, and skipped some consistency checks (such as whether

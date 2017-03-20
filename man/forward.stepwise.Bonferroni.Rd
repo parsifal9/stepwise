@@ -7,14 +7,17 @@ of a predictor.  To keep it simple, I made no provision for forcing certain vari
 all models, did not allow for specification of a data frame, and skipped some consistency checks (such as whether
 the initial model is a subset of the full model).}
 \usage{
-forward.stepwise.Bonferroni(full.model, initial.model, XX)
+forward.stepwise.Bonferroni(full.model, initial.model, data)
 }
 \arguments{
 \item{full.model}{A model formula}
 
 \item{initial.model}{A model formula}
 
-\item{XX}{a data.frame}
+\item{data}{a data.frame}
+}
+\value{
+a fitted model of class lm
 }
 \description{
 One other note: since the code uses R's drop1 and add1 functions, it respects hierarchy in models. That is,
@@ -31,7 +34,7 @@ Author: Paul A. Rubin (rubin@msu.edu)
 \examples{
 full.model <- mpg~ .
 initial.model <- mpg~ 1
-aa<-forward.stepwise.Bonferroni(full.model, initial.model,XX=mtcars)
+aa<-forward.stepwise.Bonferroni(full.model, initial.model,data=mtcars)
 }
 \keyword{Bonferroni}
 \keyword{linear}

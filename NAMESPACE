@@ -2,4 +2,5 @@
 
 export(forward.stepwise.Bonferroni)
 export(forward.stepwise.FDR)
+export(rbo)
 export(stepwise)
